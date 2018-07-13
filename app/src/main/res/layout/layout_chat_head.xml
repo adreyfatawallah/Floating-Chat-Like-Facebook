@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/chat_head_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!--Profile image for the chat head-->
+    <ImageView
+        android:id="@+id/chat_head_profile_iv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="8dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/app_name" />
+
+    <!--Close button-->
+    <ImageView
+        android:id="@+id/close_btn"
+        android:layout_width="26dp"
+        android:layout_height="26dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:visibility="gone"
+        android:src="@drawable/ic_close"
+        android:contentDescription="@string/app_name" />
+
+</RelativeLayout>
