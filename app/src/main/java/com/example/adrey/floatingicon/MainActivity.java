@@ -1,14 +1,13 @@
 package com.example.adrey.floatingicon;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,30 +38,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M)
-            return;
-
-        if(requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
-            if(Settings.canDrawOverlays(this))
+        if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
+            if (!Settings.canDrawOverlays(this))
                 initializeView();
-            else if(Build.VERSION.SDK_INT == Build.VERSION_CODES.O)
-                initializeView();
+            else {
+                Toast.makeText(this,
+                        "Draw over other app permission not available. Closing the application",
+                        Toast.LENGTH_SHORT).show();
+                finish();
+            }
         }
-
-//        if (requestCode == CODE_DRAW_OVER_OTHER_APP_PERMISSION) {
-//            if (requestCode == RESULT_OK)
-//                initializeView();
-//            else {
-//                Toast.makeText(this,
-//                        "Draw over other app permission not available. Closing the application",
-//                        Toast.LENGTH_SHORT).show();
-//                finish();
-//            }
-//        } else
-//            super.onActivityResult(requestCode, resultCode, data);
     }
 }
